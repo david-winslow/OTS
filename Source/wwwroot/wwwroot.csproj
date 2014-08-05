@@ -59,6 +59,7 @@
   <ItemGroup>
     <Content Include="Content\Report\template.docx" />
     <None Include="Properties\PublishProfiles\afrihost.pubxml" />
+    <None Include="Properties\PublishProfiles\filesystem.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

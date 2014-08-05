@@ -38,7 +38,7 @@ namespace wwwroot
                 File.Copy(template, destFileName, true);
                 WordGenerator gen = new WordGenerator(destFileName, excel);
                 gen.Generate();
-                HyperLink1.NavigateUrl = destFileName;
+                HyperLink1.NavigateUrl = string.Format("~/content/report/{0}", fileName);
                 HyperLink1.Visible = true;
 
             }
