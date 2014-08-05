@@ -28,7 +28,7 @@ namespace ReportGenerator.Tests
             WordGenerator g = new WordGenerator("templatedddd.docx", "testDataddddd.xlsx");
 
         }
-        [Test]
+        [Test,Explicit()]
         public void ShouldGeneratePersonalInformation()
         {
             WordGenerator g = new WordGenerator("template.docx", "testData.xlsx");
