@@ -11,39 +11,45 @@ using ReportDataCollector;
 
 namespace ReportGenerator.Tests
 {
+
+  
+  
+
     [TestFixture]
-    public class ReportDataCollectorTests
+    public class Linq2ExcelReportDataCollectorTests
     {
         private string _dataPath = "testdata.xlsx";
+        private IExcelCollector _collector;
 
         [Test]
         public void ShouldFetchSpreadSheetBasedOnPath()
         {
-            ExcelCollector collector = new ExcelCollector(_dataPath);
-            
+            _collector = new Linq2ExcelCollector(_dataPath);
         }
+
+
 
         [ExpectedException(typeof(FileNotFoundException))]
         [Test]
         public void ShouldTHrowExceptionIfSpreadSheetIsMissing()
         {
-            ExcelCollector collector = new ExcelCollector("bogus");
+            _collector = new Linq2ExcelCollector("bogus");
 
         }
 
         [Test]
         public void ShouldFetchPersonalInformationFromSpreadSheet()
         {
-            ExcelCollector collector = new ExcelCollector(_dataPath);
-            ReportData data  = collector.FetchData();
+             _collector = new Linq2ExcelCollector(_dataPath);
+            ReportData data  = _collector.FetchData();
             Assert.AreEqual("Mr",data.Client.Title);
             Assert.AreEqual("David",data.Client.FirstName);
-            Assert.AreEqual("Piater",data.Client.LastName);
-            Assert.AreEqual("25 Willoughby Street, Selcourt, 1559", data.Client.Address);
-            Assert.AreEqual("084 580 5881",data.Client.CellNumber);
-            Assert.AreEqual("011 818 5551",data.Client.LandLine);
-            Assert.AreEqual(new DateTime(1959,8,8), data.Client.DOB);
-            Assert.AreEqual("5908080096083", data.Client.IDNumber);
+            Assert.AreEqual("Winslow",data.Client.LastName);
+            Assert.AreEqual("20 elm avenue", data.Client.Address);
+            Assert.AreEqual("082 837 4699",data.Client.CellNumber);
+            Assert.AreEqual("0116081447",data.Client.LandLine);
+            Assert.AreEqual(new DateTime(1975,7,12), data.Client.DOB);
+            Assert.AreEqual("7507126057089", data.Client.IDNumber);
             Assert.AreEqual("Afrikaans",data.Client.HomeLanguage);
             Assert.AreEqual("English",data.Client.AssessmentLanguage);
             Assert.AreEqual(true,data.Client.DriverLicense);
@@ -52,8 +58,8 @@ namespace ReportGenerator.Tests
         [Test]
         public void ShouldFetchBackgroundInformation()
         {
-            ExcelCollector collector = new ExcelCollector(@"testdata.xlsx");
-            var b = collector.FetchData().Background;
+            _collector = new Linq2ExcelCollector(@"testdata.xlsx");
+            var b = _collector.FetchData().Background;
             Assert.AreEqual("married",b.MaritalStatus);
             Assert.AreEqual(2,b.Children);
             Assert.AreEqual(4,b.Siblings);
@@ -68,7 +74,7 @@ namespace ReportGenerator.Tests
         [Test]
         public void ShouldFetchOccupationalInformation()
         {
-            ExcelCollector collector = new ExcelCollector(_dataPath);
+            Linq2ExcelCollector collector = new Linq2ExcelCollector(_dataPath);
             var o = collector.FetchData().Occupation;
             Assert.AreEqual("Senior Personnel Practitioner – Police Officer", o.OccupationAtTimeOfIllness);
             Assert.AreEqual("SAPS", o.EmployerAtTimeOfIllness);
@@ -79,7 +85,7 @@ namespace ReportGenerator.Tests
         [Test]
         public void ShouldFetchJobDescriptionAndAddToOccupation()
         {
-            ExcelCollector collector = new ExcelCollector(_dataPath);
+            Linq2ExcelCollector collector = new Linq2ExcelCollector(_dataPath);
             var o = collector.FetchData().Occupation;
             Assert.AreEqual(14,o.JobDescription.Count);
         }
@@ -91,6 +97,12 @@ namespace ReportGenerator.Tests
             var client = new Client(){IDNumber = ID };
            Assert.AreEqual("Male",client.Gender);
             Assert.AreEqual("He",client.HeShe);
+        }
+
+        [Test]
+        public void ShouldMapRowsAsNames()
+        {
+            
         }
     }
 }

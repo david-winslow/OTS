@@ -26,7 +26,7 @@ namespace ReportGeneration
 
         public void Generate()
         {
-            ReportData reportData = new ExcelCollector(_spreadSheetFileName).FetchData();
+            ReportData reportData = new Linq2ExcelCollector(_spreadSheetFileName).FetchData();
 
             using (ITemplateDocument templateDocument = Configuration.Factory.Open(_wordtemplateFilename))
             {

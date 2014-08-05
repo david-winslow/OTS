@@ -4,11 +4,16 @@ using LinqToExcel;
 
 namespace ReportDataCollector
 {
-    public class ExcelCollector
+    public interface IExcelCollector
+    {
+        ReportData FetchData();
+    }
+
+    public class Linq2ExcelCollector : IExcelCollector
     {
         private ExcelQueryFactory _excel;
 
-        public ExcelCollector(string fileName)
+        public Linq2ExcelCollector(string fileName)
         {
             if(!File.Exists(fileName)) throw new FileNotFoundException("could not find input xlsx file.Verify file exist!");
             _excel = new ExcelQueryFactory(fileName);
