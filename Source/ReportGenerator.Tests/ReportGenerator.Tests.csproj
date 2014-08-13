@@ -85,7 +85,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WordGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OTS.Domain\OTS.Domain.csproj">
+      <Project>{E298E046-01C0-48B3-B694-5FAF30A994A7}</Project>
+      <Name>OTS.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReportGeneration\ReportGeneration.csproj">
+      <Project>{F9DA507C-A2E5-478D-B9B9-FC0CAC5594D1}</Project>
+      <Name>ReportGeneration</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

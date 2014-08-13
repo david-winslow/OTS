@@ -72,7 +72,7 @@
   <ItemGroup>
     <Reference Include="Aspose.Words, Version=14.7.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\AsposeVA\Aspose.Words.dll</HintPath>
+      <HintPath>..\packages\Aspose\Words\9.1\Aspose.Words.dll</HintPath>
     </Reference>
     <Reference Include="NGS.Templater">
       <HintPath>..\packages\NGS.Templater.dll</HintPath>
@@ -85,7 +85,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsposeWordGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OTS.Domain\OTS.Domain.csproj">
+      <Project>{E298E046-01C0-48B3-B694-5FAF30A994A7}</Project>
+      <Name>OTS.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

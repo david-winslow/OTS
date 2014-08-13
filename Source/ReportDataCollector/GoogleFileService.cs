@@ -10,6 +10,7 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Download;
 using Google.Apis.Drive.v2;
 using Google.Apis.Services;
+using OTS.Domain;
 
 namespace ReportDataCollector
 {
@@ -20,25 +21,29 @@ namespace ReportDataCollector
         /// <summary>The Drive API scopes.</summary>
         private static readonly string[] Scopes = new[] { DriveService.Scope.DriveFile, DriveService.Scope.Drive };
 
-        public async void DownloadFile(string from , string to)
-        {
-            GoogleWebAuthorizationBroker.Folder = "Drive.Sample";
-            UserCredential credential;
-            using (var stream = new System.IO.FileStream("google.json",
-                System.IO.FileMode.Open, System.IO.FileAccess.Read))
-            {
-                credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets, Scopes, "user", CancellationToken.None);
-            }
-            // Create the service.
-            var service = new DriveService(new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = "fcereporting",
-            });
 
-            var listRequest = service.Files.List().Execute();
-            
+        public string DownloadFile(string from , string to)
+        {
+            return string.Empty;
+
+        }
+
+        public void CreateSessionStructure(ReportData data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ProcessFile()
+        {
+            return null;
+
+        }
+
+        public bool HasFileToProcess()
+        {
+            //search for it
+            //save url
+            return false;
         }
     }
 }
