@@ -15,7 +15,7 @@ namespace ReportDataCollector
 
     public class ExcelDataCollector
     {
-        private readonly string _path = "c:\\googledrive\\input.ods";
+        private readonly string _path = "c:\\googledrive\\input.xlsx";
 
         public ExcelDataCollector()
         {
@@ -26,7 +26,7 @@ namespace ReportDataCollector
             var workbook = new Workbook(_path);
             var c = workbook.Worksheets[0].Cells;
 
-            var snippets = GetList(c,"D",9,3);
+            var snippets = GetList(c,"D",7,3);
             return new ReportData() { Date = c["B1"].DateTimeValue, FirstName = c["b3"].StringValue, Surname = c["b2"].StringValue, Therapist = c["b4"].StringValue, TemplateName = c["b5"].StringValue,Snippets = snippets };
         }
 

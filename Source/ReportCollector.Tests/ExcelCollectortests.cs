@@ -17,7 +17,7 @@ namespace ReportCollector.Tests
         [Test]
         public void ShouldConvertXlsToTreportData()
         {
-            //var excelDataCollector = new ExcelDataCollector(@"test1.ods");
+            //var excelDataCollector = new ExcelDataCollector(@"test1.xlsx");
             var excelDataCollector = new ExcelDataCollector();
             var reportData = excelDataCollector.GetData();
             reportData.FirstName.ShouldEqual("David");

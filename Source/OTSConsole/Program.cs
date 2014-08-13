@@ -16,13 +16,19 @@ namespace OTSConsole
     {
         static void Main(string[] args)
         {
-            var fileService = new GoogleFileService();
-            if (fileService.HasFileToProcess())
+            while (true)
             {
-                fileService.ProcessFile();
-                ReportData data = new ExcelDataCollector().GetData();
-                new AsposeWordGenerator(@"C:\googledrive\templates\input").GenerateReport(data);
-                fileService.CreateSessionStructure(data);
+                try
+                {
+                    var fileService = new GoogleFileService();
+                    if (fileService.HasFileToProcess())
+                    {
+                        fileService.ProcessFile();
+                        ReportData data = new ExcelDataCollector().GetData();
+                        new AsposeWordGenerator(@"C:\googledrive\templates").GenerateReport(data);
+                    }
+                }
+                catch{}
             }
         }
     }

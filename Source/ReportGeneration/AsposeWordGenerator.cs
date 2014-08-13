@@ -23,8 +23,8 @@ namespace ReportGeneration
         public void GenerateReport(ReportData reportData)
         {
             var path = @"c:\googledrive\report.docx";
-            Aspose.Words.Document template = new Document(Path.Combine(_rootPath,reportData.TemplateName + ".odt"));
-            foreach (string snippet in reportData.Snippets)
+            Aspose.Words.Document template = new Document(Path.Combine(_rootPath, reportData.TemplateName + ".odt"));
+            foreach (string snippet in reportData.Snippets.Where(snippet => !string.IsNullOrEmpty(snippet)))
             {
                 Document snippetDocument = new Document(GetPathForSnippet(snippet,reportData.TemplateName,reportData.Therapist));
                 template.AppendDocument(snippetDocument,ImportFormatMode.KeepSourceFormatting);

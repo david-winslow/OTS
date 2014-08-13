@@ -17,7 +17,7 @@ namespace ReportDataCollector
     public class GoogleFileService
     {
         private DriveService _service;
-        private static string _accessToken;
+        private string _accessToken;
         private const string CLIENTID = "1057012666404-8lbnbd8cf45dr658c7bqa7jrufr66teo.apps.googleusercontent.com";
         private const string SECRET = "9Mkk3rCzOI2tYLsmmZqfzFec";
         private const string GDRIVEROOT = "root";
@@ -34,14 +34,14 @@ namespace ReportDataCollector
         {
             using (var gDriveStream = GetGoogleDriveFileStream(fileId, fileFormat))
             {
-                using (FileStream fs = new FileStream(target, FileMode.Create, FileAccess.ReadWrite))
+                using (var fs = new FileStream(target, FileMode.Create, FileAccess.ReadWrite))
                 {
                     gDriveStream.CopyTo(fs);
                 }
             }
         }
 
-        private static DriveService GetAuthenticatedDriveService()
+        private DriveService GetAuthenticatedDriveService()
         {
             UserCredential credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                 new ClientSecrets
@@ -78,8 +78,7 @@ namespace ReportDataCollector
             if(exportFormat != null)
                 url = file.ExportLinks[exportFormat];
             if (!String.IsNullOrEmpty(url))
-            {
-                
+            {                
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(
                         new Uri(url));
                     _service.HttpClientInitializer.Initialize(_service.HttpClient);
@@ -122,16 +121,18 @@ namespace ReportDataCollector
 
         public void UploadFile(string filePath)
         {
-            using (var fs = new FileStream("input_final.gsheet", FileMode.Open, FileAccess.Read))
+            using (var fs = new FileStream("input_final.xlsx", FileMode.Open, FileAccess.Read))
             {
                 fs.Seek(0, SeekOrigin.Begin);
 
                 var gfile = new Google.Apis.Drive.v2.Data.File()
                 {
                     Title = "input_final",
-                    MimeType = "application/vnd.google-apps.spreadsheet"
+                    MimeType = "application/vnd.oasis.opendocument.spreadsheet"
                 };
-                var progress = _service.Files.Insert(gfile, fs, "text/plain").Upload();
+                var request = _service.Files.Insert(gfile, fs, "application/vnd.oasis.opendocument.spreadsheet");
+                request.Convert = true;
+                var progress = request.Upload();
             }
         }
 
@@ -142,12 +143,7 @@ namespace ReportDataCollector
 
         public void ProcessFile()
         {
-            DownloadFile(InputSheetId, Path.Combine(LOCALPATH, "input.odt"), "application/vnd.oasis.opendocument.text");
-        }
-
-        public void CreateSessionStructure(ReportData data)
-        {
-            throw new NotImplementedException();
+            DownloadFile(InputSheetId, Path.Combine(LOCALPATH, "input.xlsx"), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }
