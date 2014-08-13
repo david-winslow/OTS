@@ -19,8 +19,8 @@ namespace OTSConsole
             var fileService = new GoogleFileService();
             if (fileService.HasFileToProcess())
             {
-                string path = fileService.ProcessFile();
-                ReportData data = new ExcelDataCollector(path).GetData();
+                fileService.ProcessFile();
+                ReportData data = new ExcelDataCollector().GetData();
                 new AsposeWordGenerator(@"C:\googledrive\templates\input").GenerateReport(data);
                 fileService.CreateSessionStructure(data);
             }

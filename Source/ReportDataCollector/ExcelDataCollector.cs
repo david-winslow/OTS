@@ -15,11 +15,10 @@ namespace ReportDataCollector
 
     public class ExcelDataCollector
     {
-        private readonly string _path;
+        private readonly string _path = "c:\\googledrive\\input.ods";
 
-        public ExcelDataCollector(string path)
+        public ExcelDataCollector()
         {
-            _path = path;
         }
 
         public ReportData GetData()

@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExportGoogleFileTests.cs" />
     <Compile Include="WordGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -93,10 +94,20 @@
       <Project>{E298E046-01C0-48B3-B694-5FAF30A994A7}</Project>
       <Name>OTS.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ReportDataCollector\ReportDataCollector.csproj">
+      <Project>{737daf0c-3061-4329-929f-7126828fd09b}</Project>
+      <Name>ReportDataCollector</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReportGeneration\ReportGeneration.csproj">
       <Project>{F9DA507C-A2E5-478D-B9B9-FC0CAC5594D1}</Project>
       <Name>ReportGeneration</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="input_final.gsheet">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
